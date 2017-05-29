@@ -1,1 +1,1 @@
-# weekend_chal_2
+Weekend Challenge 2 Hard Mode

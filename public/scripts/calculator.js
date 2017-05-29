@@ -1,120 +1,221 @@
 $(document).ready(function() {
 
-  // add button
-  $('#addButton').on('click', function() {
-    console.log('Add Button Working');
-    console.log($('#value1').val());
-    console.log($('#value2').val());
+    var result = [];
+    var x;
+    var y;
+    var z;
 
-    var additionObject = {
-      x: $('#value1').val(),
-      y: $('#value2').val(),
-      type: "add"
-    }; // end objectToSend
-    console.log('sending:', additionObject);
+    $('#Button0').on('click', function() {
+      $('#input').empty();
+      console.log(this.value);
+      console.log('button0');
+      result.push(0);
+      $('#input').html(result);
+    }); //end Button0
+    $('#Button1').on('click', function() {
+      $('#input').empty();
+      console.log(this.value);
+      console.log('button1');
+      result.push(1);
+      $('#input').html(result);
+    }); //end Button1
+    $('#Button2').on('click', function() {
+      $('#input').empty();
+      console.log(this.value);
+      console.log('button2');
+      result.push(2);
+      $('#input').html(result);
+    }); //end Button2
+    $('#Button3').on('click', function() {
+      $('#input').empty();
+      console.log(this.value);
+      console.log('button3');
+      result.push(3);
+      $('#input').html(result);
+    }); //end Button3
+    $('#Button4').on('click', function() {
+      console.log(this.value);
+      console.log('button4');
+      result.push(4);
+      $('#input').html(result);
+    }); //end Button4
+    $('#Button5').on('click', function() {
+      console.log(this.value);
+      console.log('button5');
+      result.push(5);
+      $('#input').html(result);
+    }); //end Button5
+    $('#Button6').on('click', function() {
+      console.log(this.value);
+      console.log('button6');
+      result.push(6);
+      $('#input').html(result);
+    }); //end Button6
+    $('#Button7').on('click', function() {
+      console.log(this.value);
+      console.log('button7');
+      result.push(7);
+      $('#input').html(result);
+    }); //end Button7
+    $('#Button8').on('click', function() {
+      console.log(this.value);
+      console.log('button8');
+      result.push(8);
+      $('#input').html(result);
+    }); //end Button8
+    $('#Button9').on('click', function() {
+      console.log(this.value);
+      console.log('button9');
+      result.push(9);
+      $('#input').html(result);
+    }); //end Button9
+    $('#clearButton').on('click', function() {
+      console.log('clear button');
+      result.splice(0);
+      $('#input').empty();
+    }); //end clearButton
 
-    // use AJAX to send Object to server
-    $.ajax({
-      type: 'POST',
-      url: '/Addition',
-      data: additionObject,
-      success: function(response) {
-        console.log('back from post:', response);
-        // when back from server update display
-        $('#answer').val(response.resultAdd);
-        $('#answer').append(response.resultAdd);
-      } // end success
-    }); //end ajax
-  }); // end add
+    $('#addButton').on('click', function() {
+      $('#input').empty();
+      result.push('+');
+      $('#input').html(result);
+      // calculation();
+      console.log(result);
+    });
 
-  // subtract button
-  $('#subtractButton').on('click', function() {
-    console.log('Subtract Button Working');
-    console.log($('#value1').val());
-    console.log($('#value2').val());
+    $('#subtractButton').on('click', function() {
+      result.push('-');
+      $('#input').html(result);
+      // calculation();
+      console.log(result);
+    });
 
-    var subtractionObject = {
-      x: $('#value1').val(),
-      y: $('#value2').val(),
-      type: "subtract"
-    }; // end objectToSend
-    console.log('sending:', subtractionObject);
+    $('#multiplyButton').on('click', function() {
+      $('#input').empty();
+      result.push('x');
+      $('#input').html(result);
+      // calculation();
+      console.log(result);
+    });
 
-    // use AJAX to send Object to server
-    $.ajax({
-      type: 'POST',
-      url: '/Subtraction',
-      data: subtractionObject,
-      success: function(response) {
-        console.log('back from post:', response);
-        // when back from server update display
-        $('#answer').val(response.resultSubtraction);
-        $('#answer').append(response.resultSubtraction);
-      } // end success
-    }); //end ajax
-  }); // end subtract
+    $('#divideButton').on('click', function() {
+      $('#input').empty();
+      result.push('/');
+      $('#input').html(result);
+      // calculation();
+      console.log(result);
+    });
 
-  // multiply button
-  $('#multiplyButton').on('click', function() {
-    console.log('Multiply Button Working');
-    console.log($('#value1').val());
-    console.log($('#value2').val());
+    $('#equalsButton').on('click', function() {
+      console.log('Equal Button Working');
 
-    var multiplicationObject = {
-      x: $('#value1').val(),
-      y: $('#value2').val(),
-      type: "multiply"
-    }; // end objectToSend
-    console.log('sending:', multiplicationObject);
+      result.forEach(function(element, index, array) {
 
-    // use AJAX to send Object to server
-    $.ajax({
-      type: 'POST',
-      url: '/Multiplication',
-      data: multiplicationObject,
-      success: function(response) {
-        console.log('back from post:', response);
-        // when back from server update display
-        $('#answer').val(response.resultMultiplication);
-        $('#answer').append(response.resultMultiplication);
-      } // end success
-    }); //end ajax
-  }); //end multiply
+        if (isNaN(parseInt(element))) {
+          x = result.splice(0, index).join("");
+          y = result.splice(1).join("");
+          console.log(x);
+          console.log(y);
 
-  //divide button
-  $('#divideButton').on('click', function() {
-    console.log('Divide Button Working');
+          if (element == "+") {
+            z = "add";
 
-    console.log($('#value1').val());
-    console.log($('#value2').val());
+            var additionObject = {
+              x: x,
+              y: y,
+              type: "add"
+            };
+            $.ajax({
+              type: 'POST',
+              url: '/Addition',
+              data: additionObject,
+              success: function(response) {
+                console.log('back from post:', response);
+                // when back from server update display
+                $('#input').val(response.resultAdd);
+                $('#input').empty();
+                $('#input').append(response.resultAdd);
+              } // end success
+            }); //end ajax
+          }
 
-    var divisionObject = {
-      x: $('#value1').val(),
-      y: $('#value2').val(),
-      type: "divide"
-    }; // end objectToSend
-    console.log('sending:', divisionObject);
+          if (element == "-") {
+            z = "subtract";
 
-    // use AJAX to send Object to server
-    $.ajax({
-      type: 'POST',
-      url: '/Division',
-      data: divisionObject,
-      success: function(response) {
-        console.log('back from post:', response);
-        // when back from server update display
-        $('#answer').val(response.resultDivision);
-        $('#answer').append(response.resultDivision);
-      } // end success
-    }); //end ajax
-  }); //end divide
+            var subtractionObject = {
+              x: x,
+              y: y,
+              type: "subtract"
+            }; // end objectToSend
 
-  // clear button
-  $('#clearButton').on('click', function() {
-    console.log('Clear Button Working');
-    $('#value1').val('');
-    $('#value2').val('');
-    $('#answer').empty();
+            // use AJAX to send Object to server
+            $.ajax({
+              type: 'POST',
+              url: '/Subtraction',
+              data: subtractionObject,
+              success: function(response) {
+                console.log('back from post:', response);
+                // when back from server update display
+                $('#input').val(response.resultSubtraction);
+                $('#input').empty();
+                $('#input').append(response.resultSubtraction);
+              } // end success
+            }); //end ajax
+          }
 
-  }); //end clear
-}); // document load
+          if (element == "x") {
+            z = "multiply";
+
+            var multiplicationObject = {
+              x: x,
+              y: y,
+              type: "multiply"
+            }; // end objectToSend
+
+            // use AJAX to send Object to server
+            $.ajax({
+              type: 'POST',
+              url: '/Multiplication',
+              data: multiplicationObject,
+              success: function(response) {
+                console.log('back from post:', response);
+                // when back from server update display
+                $('#input').val(response.resultMultiplication);
+                $('#input').empty();
+                $('#input').append(response.resultMultiplication);
+              } // end success
+            }); //end ajax
+          }
+
+          if (element == "/") {
+            z = "divide";
+
+            var divisionObject = {
+              x: x,
+              y: y,
+              type: "divide"
+            }; // end objectToSend
+
+            // use AJAX to send Object to server
+            $.ajax({
+              type: 'POST',
+              url: '/Division',
+              data: divisionObject,
+              success: function(response) {
+                console.log('back from post:', response);
+                // when back from server update display
+                $('#input').val(response.resultDivision);
+                $('#input').empty();
+                $('#input').append(response.resultDivision);
+              } // end success
+            }); //end ajax
+          }
+
+          $('#input').empty();
+        }
+      });
+    });
+
+
+  } // end calculation
+);
