@@ -32,3 +32,30 @@ app.post('/Addition', function(req, res) {
   };
   res.send(additionResult);
 });
+
+app.post('/Subtraction', function(req, res) {
+  x = Number(req.body.x);
+  y = Number(req.body.y);
+  var subtractionResult = {
+    resultSubtraction: x - y
+  };
+  res.send(subtractionResult);
+});
+
+app.post('/Multiplication', function(req, res) {
+  x = Number(req.body.x);
+  y = Number(req.body.y);
+  var multiplicationResult = {
+    resultMultiplication: x * y
+  };
+  res.send(multiplicationResult);
+});
+
+app.post('/Division', function(req, res) {
+  x = Number(req.body.x);
+  y = Number(req.body.y);
+  var divisionResult = {
+    resultDivision: x / y
+  };
+  res.send(divisionResult);
+});

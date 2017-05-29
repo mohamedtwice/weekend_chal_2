@@ -33,12 +33,25 @@ $(document).ready(function() {
     console.log($('#value1').val());
     console.log($('#value2').val());
 
-    var objectToSend = {
+    var subtractionObject = {
       x: $('#value1').val(),
       y: $('#value2').val(),
       type: "subtract"
     }; // end objectToSend
-    console.log('sending:', objectToSend);
+    console.log('sending:', subtractionObject);
+
+    // use AJAX to send Object to server
+    $.ajax({
+      type: 'POST',
+      url: '/Subtraction',
+      data: subtractionObject,
+      success: function(response) {
+        console.log('back from post:', response);
+        // when back from server update display
+        $('#answer').val(response.resultSubtraction);
+        $('#answer').append(response.resultSubtraction);
+      } // end success
+    }); //end ajax
   }); // end subtract
 
   // multiply button
@@ -47,12 +60,25 @@ $(document).ready(function() {
     console.log($('#value1').val());
     console.log($('#value2').val());
 
-    var objectToSend = {
+    var multiplicationObject = {
       x: $('#value1').val(),
       y: $('#value2').val(),
       type: "multiply"
     }; // end objectToSend
-    console.log('sending:', objectToSend);
+    console.log('sending:', multiplicationObject);
+
+    // use AJAX to send Object to server
+    $.ajax({
+      type: 'POST',
+      url: '/Multiplication',
+      data: multiplicationObject,
+      success: function(response) {
+        console.log('back from post:', response);
+        // when back from server update display
+        $('#answer').val(response.resultMultiplication);
+        $('#answer').append(response.resultMultiplication);
+      } // end success
+    }); //end ajax
   }); //end multiply
 
   //divide button
@@ -62,12 +88,25 @@ $(document).ready(function() {
     console.log($('#value1').val());
     console.log($('#value2').val());
 
-    var objectToSend = {
+    var divisionObject = {
       x: $('#value1').val(),
       y: $('#value2').val(),
       type: "divide"
     }; // end objectToSend
-    console.log('sending:', objectToSend);
+    console.log('sending:', divisionObject);
+
+    // use AJAX to send Object to server
+    $.ajax({
+      type: 'POST',
+      url: '/Division',
+      data: divisionObject,
+      success: function(response) {
+        console.log('back from post:', response);
+        // when back from server update display
+        $('#answer').val(response.resultDivision);
+        $('#answer').append(response.resultDivision);
+      } // end success
+    }); //end ajax
   }); //end divide
 
   // clear button
@@ -75,5 +114,6 @@ $(document).ready(function() {
     console.log('Clear Button Working');
     $('#value1').val('');
     $('#value2').val('');
+    $('#answer').val(' ');
   }); //end clear
 }); // document load
