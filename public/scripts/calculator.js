@@ -114,6 +114,7 @@ $(document).ready(function() {
     console.log('Clear Button Working');
     $('#value1').val('');
     $('#value2').val('');
-    $('#answer').val(' ');
+    $('#answer').empty();
+
   }); //end clear
 }); // document load
