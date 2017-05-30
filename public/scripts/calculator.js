@@ -79,14 +79,13 @@ $(document).ready(function() {
       $('#input').empty();
       result.push('+');
       $('#input').html(result);
-      // calculation();
       console.log(result);
     });
 
     $('#subtractButton').on('click', function() {
+      $('#input').empty();
       result.push('-');
       $('#input').html(result);
-      // calculation();
       console.log(result);
     });
 
@@ -94,7 +93,6 @@ $(document).ready(function() {
       $('#input').empty();
       result.push('x');
       $('#input').html(result);
-      // calculation();
       console.log(result);
     });
 
@@ -102,7 +100,6 @@ $(document).ready(function() {
       $('#input').empty();
       result.push('/');
       $('#input').html(result);
-      // calculation();
       console.log(result);
     });
 
@@ -211,7 +208,8 @@ $(document).ready(function() {
             }); //end ajax
           }
 
-          $('#input').empty();
+          $('#input').html(z);
+          result.splice(0);
         }
       });
     });
